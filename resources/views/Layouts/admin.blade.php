@@ -33,6 +33,8 @@ data-assets-path="{{ asset('/') }}" data-template="vertical-menu-template-free">
     <!-- Vendors CSS -->
     <link rel="stylesheet" href={{asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}} />
 
+    @yield('tiny-mce')
+
     <!-- Page CSS -->
     <style>
         .permanent-marker-regular {
@@ -62,7 +64,7 @@ data-assets-path="{{ asset('/') }}" data-template="vertical-menu-template-free">
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
-                    <li class="menu-item active">
+                    <li class="menu-item {{ request()->routeIs('Admin.dashboard') ? 'active' : '' }}">
                         <a href="{{route('Admin.dashboard')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
@@ -70,7 +72,7 @@ data-assets-path="{{ asset('/') }}" data-template="vertical-menu-template-free">
                     </li>
                     <!-- /Dashboard -->
                     <!-- Blog -->
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->routeIs('Admin.blog') ? 'active' : '' }}">
                         <a href="{{route('Admin.blog')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bxl-blogger"></i>
                             <div data-i18n="Analytics">Blog</div>
