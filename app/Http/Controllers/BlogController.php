@@ -54,8 +54,8 @@ class BlogController extends Controller
             'content' => 'required',
             'date' => 'nullable|date',
             'status' => 'required|boolean',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'seo_thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10048',
+            'seo_thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5048',
             'seo_keywords' => 'nullable|string',
             'seo_description' => 'nullable|string|max:500',
         ]);
@@ -94,8 +94,8 @@ class BlogController extends Controller
             'content' => 'required',
             'date' => 'nullable|date',
             'status' => 'required|boolean',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'seo_thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10048',
+            'seo_thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5048',
             'seo_keywords' => 'nullable|string',
             'seo_description' => 'nullable|string|max:500',
         ]);

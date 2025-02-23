@@ -82,13 +82,22 @@
                     </li>
                     <!-- /Blog -->
                     <!--Book-->
-                    {{-- <li class="menu-item {{ request()->routeIs('Admin.book.index') ? 'active' : '' }}">
+                    <li class="menu-item {{ request()->routeIs('Admin.book.index') ? 'active' : '' }}">
                         <a href="{{ route('Admin.book.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-book"></i>
                             <div data-i18n="Analytics">Book</div>
                         </a>
-                    </li> --}}
+                    </li>
                     <!--/Book-->
+                    <!--News-->
+                    <li class="menu-item {{ request()->routeIs('Admin.news.index') ? 'active' : '' }}">
+                        <a href="{{ route('Admin.news.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-news"></i>
+                            <div data-i18n="Analytics">News</div>
+                        </a>
+                    </li>
+                    <!--/News-->
+
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -160,6 +169,19 @@
                                         <li class="breadcrumb-item active" aria-current="page">Archived Blog</li>
                                     @else
                                         <li class="breadcrumb-item active" aria-current="page">Blog List</li>
+                                    @endif
+                                @endif
+                                @if (request()->routeIs('Admin.book'))
+                                    <li class="breadcrumb-item"><a href="{{ route('Admin.book.index') }}">Books</a>
+                                    </li>
+                                    @if (request()->routeIs('Admin.book.create'))
+                                        <li class="breadcrumb-item active" aria-current="page">Create Book</li>
+                                    @elseif(request()->routeIs('Admin.book.edit'))
+                                        <li class="breadcrumb-item active" aria-current="page">Edit Book</li>
+                                    @elseif(request()->routeIs('Admin.book.archived'))
+                                        <li class="breadcrumb-item active" aria-current="page">Archived Book</li>
+                                    @else
+                                        <li class="breadcrumb-item active" aria-current="page">Book List</li>
                                     @endif
                                 @endif
                             </ol>

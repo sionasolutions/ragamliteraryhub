@@ -4,6 +4,8 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\NewsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,4 +45,24 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/blog/{id}/force-delete', [BlogController::class, 'forceDelete'])->name('Admin.blog.force-delete');
     Route::get('admin/blog/archived', [BlogController::class, 'archived'])->name('Admin.blog.archived');
 
+    // Book routes
+    Route::get('/admin/book/index', [BookController::class, 'index'])->name('Admin.book.index');
+    Route::post('/admin/book/{id}/toggleStatus', [BookController::class, 'toggleStatus']);
+    Route::get('/admin/book/create', [BookController::class, 'create'])->name('Admin.book.create');
+    Route::post('/admin/book/store', [BookController::class, 'store'])->name('Admin.book.store');
+    Route::get('/admin/book/{id}/edit', [BookController::class, 'edit'])->name('Admin.book.edit');
+    Route::put('/admin/book/{id}/update', [BookController::class, 'update'])->name('Admin.book.update');
+    Route::delete('/admin/book/{id}/destroy', [BookController::class, 'destroy'])->name('Admin.book.destroy');
+    Route::patch('/admin/book/{id}/restore', [BookController::class, 'restore'])->name('Admin.book.restore');
+    Route::get('/admin/book/{id}/force-delete', [BookController::class, 'forceDelete'])->name('Admin.book.force-delete');
+    Route::get('admin/book/archived', [BookController::class, 'archived'])->name('Admin.book.archived');
+
+
+    // News routes
+    Route::get('/admin/news/index', [NewsController::class, 'index'])->name('Admin.news.index');
+    Route::get('/admin/news/create', [NewsController::class, 'create'])->name('Admin.news.create');
+    Route::post('/admin/news/store', [NewsController::class, 'store'])->name('Admin.news.store');
+    Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit'])->name('Admin.news.edit');
+    Route::put('/admin/news/{id}/update', [NewsController::class, 'update'])->name('Admin.news.update');
+    Route::delete('/admin/news/{id}/destroy', [NewsController::class, 'destroy'])->name('Admin.news.destroy');
 });
