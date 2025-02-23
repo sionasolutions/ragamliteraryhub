@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('seo_thumbnail')->nullable();
             $table->text('seo_keywords')->nullable();
             $table->text('seo_description')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
         });

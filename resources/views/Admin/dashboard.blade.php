@@ -2,9 +2,6 @@
 
 
 @section('content')
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold ">Dashboard</h4>
-        <h6 class="fw-bold mb-4"><span class="text-muted fw-light">Dashboard /</span></h6>
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-3 mb-6">
                 <div class="card h-100">

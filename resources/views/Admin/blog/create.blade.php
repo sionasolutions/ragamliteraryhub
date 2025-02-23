@@ -9,9 +9,6 @@
 @endsection
 
 @section('content')
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold ">Blog</h4>
-        <h6 class="fw-bold mb-4"><span class="text-muted fw-light">Extended UI /</span> Text Divider</h6>
         <form action="{{ route('Admin.blog.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
@@ -69,7 +66,8 @@
                                 </div>
                             </div>
         
-                            <x-tinymce-editor/>
+                            <textarea id="myeditorinstance" name="content" placeholder="Enter your content">
+                            </textarea>
                         </div>
                     </div>
                 </div>

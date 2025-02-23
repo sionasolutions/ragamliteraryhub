@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
-data-assets-path="{{ asset('/') }}" data-template="vertical-menu-template-free">
+    data-assets-path="{{ asset('/') }}" data-template="vertical-menu-template-free">
 
 <head>
     <meta charset="utf-8" />
@@ -10,9 +10,9 @@ data-assets-path="{{ asset('/') }}" data-template="vertical-menu-template-free">
     <title>@yield('title')</title>
 
     <meta name="description" content="" />
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href={{asset('img/favicon/favicon.ico')}} />
+    <link rel="icon" type="image/x-icon" href={{ asset('img/favicon/favicon.ico') }} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,15 +23,15 @@ data-assets-path="{{ asset('/') }}" data-template="vertical-menu-template-free">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href={{asset('vendor/fonts/boxicons.css')}} />
+    <link rel="stylesheet" href={{ asset('vendor/fonts/boxicons.css') }} />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href={{asset('vendor/css/core.css')}} class="template-customizer-core-css" />
-    <link rel="stylesheet" href={{asset('vendor/css/theme-default.css')}} class="template-customizer-theme-css" />
-    <link rel="stylesheet" href={{asset('css/demo.css')}} />
+    <link rel="stylesheet" href={{ asset('vendor/css/core.css') }} class="template-customizer-core-css" />
+    <link rel="stylesheet" href={{ asset('vendor/css/theme-default.css') }} class="template-customizer-theme-css" />
+    <link rel="stylesheet" href={{ asset('css/demo.css') }} />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href={{asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}} />
+    <link rel="stylesheet" href={{ asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }} />
 
     @yield('tiny-mce')
 
@@ -44,9 +44,9 @@ data-assets-path="{{ asset('/') }}" data-template="vertical-menu-template-free">
         }
     </style>
     <!-- Helpers -->
-    <script src={{asset('vendor/js/helpers.js')}}></script>
+    <script src={{ asset('vendor/js/helpers.js') }}></script>
 
-    <script src={{asset('js/config.js')}}></script>
+    <script src={{ asset('js/config.js') }}></script>
 </head>
 
 <body>
@@ -65,15 +65,15 @@ data-assets-path="{{ asset('/') }}" data-template="vertical-menu-template-free">
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item {{ request()->routeIs('Admin.dashboard') ? 'active' : '' }}">
-                        <a href="{{route('Admin.dashboard')}}" class="menu-link">
+                        <a href="{{ route('Admin.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
                     </li>
                     <!-- /Dashboard -->
                     <!-- Blog -->
-                    <li class="menu-item {{ request()->routeIs('Admin.blog') ? 'active' : '' }}">
-                        <a href="{{route('Admin.blog')}}" class="menu-link">
+                    <li class="menu-item {{ request()->routeIs('Admin.blog.index') ? 'active' : '' }}">
+                        <a href="{{ route('Admin.blog.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bxl-blogger"></i>
                             <div data-i18n="Analytics">Blog</div>
                         </a>
@@ -102,7 +102,7 @@ data-assets-path="{{ asset('/') }}" data-template="vertical-menu-template-free">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src={{asset('img/avatars/1.png')}} alt
+                                        <img src={{ asset('img/avatars/1.png') }} alt
                                             class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </a>
@@ -126,53 +126,77 @@ data-assets-path="{{ asset('/') }}" data-template="vertical-menu-template-free">
 
                 <div class="content-wrapper">
                     <!-- Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <nav aria-label="breadcrumb" class="m-2">
+                            <ol class="breadcrumb">
+                                @if (request()->routeIs('Admin.dashboard'))
+                                    <li class="breadcrumb-item"><a href="{{ route('Admin.dashboard') }}">Dashboard</a>
+                                    </li>
+                                @endif
+                                @if (request()->routeIs('Admin.blog'))
+                                    <li class="breadcrumb-item"><a href="{{ route('Admin.blog.index') }}">Blogs</a>
+                                    </li>
+                                    @if (request()->routeIs('Admin.blog.create'))
+                                        <li class="breadcrumb-item active" aria-current="page">Create Blog</li>
+                                    @elseif(request()->routeIs('Admin.blog.edit'))
+                                        <li class="breadcrumb-item active" aria-current="page">Edit Blog</li>
+                                    @elseif(request()->routeIs('Admin.blog.archived'))
+                                        <li class="breadcrumb-item active" aria-current="page">Archived Blog</li>
+                                    @else
+                                        <li class="breadcrumb-item active" aria-current="page">Blog List</li>
+                                    @endif
+                                @endif
+                            </ol>
+                        </nav>
 
-                    @yield('content')
-                    <!-- / Content -->
 
-                    <!-- Footer -->
-                    <footer class="content-footer footer bg-footer-theme">
-                        <div class="container-xxl d-flex justify-content-center py-2 flex-md-row">
-                            <div class="mb-2 mb-md-0">
-                                © Developed with ❤️ by
-                                <a href="https://sionasolutions.com/" target="_blank" class="footer-link fw-bolder">Siona
-                                    Solutions</a>
+                        @yield('content')
+                        <!-- / Content -->
+
+                        <!-- Footer -->
+                        <footer class="content-footer footer bg-footer-theme">
+                            <div class="container-xxl d-flex justify-content-center py-2 flex-md-row">
+                                <div class="mb-2 mb-md-0">
+                                    © Developed with ❤️ by
+                                    <a href="https://sionasolutions.com/" target="_blank"
+                                        class="footer-link fw-bolder">Siona
+                                        Solutions</a>
+                                </div>
                             </div>
-                        </div>
-                    </footer>
-                    <!-- / Footer -->
+                        </footer>
+                        <!-- / Footer -->
 
-                    <div class="content-backdrop fade"></div>
+                        <div class="content-backdrop fade"></div>
+                    </div>
+
+
+                    <!-- Content wrapper -->
                 </div>
-
-
-                <!-- Content wrapper -->
+                <!-- / Layout page -->
             </div>
-            <!-- / Layout page -->
+
+            <!-- Overlay -->
+            <div class="layout-overlay layout-menu-toggle"></div>
         </div>
+        <!-- / Layout wrapper -->
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
-    <script>
         @yield('js')
-    </script>
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src={{asset('vendor/libs/jquery/jquery.js')}}></script>
-    <script src={{asset('vendor/libs/popper/popper.js')}}></script>
-    <script src={{asset('vendor/js/bootstrap.js')}}></script>
-    <script src={{asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}></script>
 
-    <script src={{asset('vendor/js/menu.js')}}></script>
-    <!-- endbuild -->
+        <!-- Core JS -->
+        <!-- build:js assets/vendor/js/core.js -->
+        <script src={{ asset('vendor/libs/jquery/jquery.js') }}></script>
+        <script src={{ asset('vendor/libs/popper/popper.js') }}></script>
+        <script src={{ asset('vendor/js/bootstrap.js') }}></script>
+        <script src={{ asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}></script>
 
-    <!-- Vendors JS -->
+        <script src={{ asset('vendor/js/menu.js') }}></script>
+        <!-- endbuild -->
 
-    <!-- Main JS -->
-    <script src={{asset('js/admin-main.js')}}></script>
+        <!-- Vendors JS -->
+
+        <!-- Main JS -->
+        <script src={{ asset('js/admin-main.js') }}></script>
 
 </body>
 
