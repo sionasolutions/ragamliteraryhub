@@ -27,8 +27,20 @@ class BlogController extends Controller
         $blog->status = $request->status;
         $blog->save();
 
-        return response()->json(['message' => 'Status updated successfully']);
+        // Flashing toastr success message to the session
+        session()->flash('toastr', [
+            'type' => 'success',
+            'message' => 'Blog Status Updated Successfully!'
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'status' => $blog->status
+        ]);
     }
+
+
+
 
     public function create()
     {
@@ -135,10 +147,15 @@ class BlogController extends Controller
 
     public function destroy($id)
     {
-        $blog = Blog::findOrFail($id);
-        $blog->delete();
-        return redirect()->back()->with('success', 'Blog Deleted Successfully!');
+        if (request()->isMethod('delete')) {
+            $blog = Blog::findOrFail($id);
+            $blog->delete();
+            return response()->json(['success' => 'Blog Deleted Successfully!']);
+        }
+        return response()->json(['error' => 'Invalid request'], 405);
     }
+
+
 
     public function restore($id)
     {

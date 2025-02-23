@@ -29,10 +29,12 @@
     <link rel="stylesheet" href={{ asset('vendor/css/core.css') }} class="template-customizer-core-css" />
     <link rel="stylesheet" href={{ asset('vendor/css/theme-default.css') }} class="template-customizer-theme-css" />
     <link rel="stylesheet" href={{ asset('css/demo.css') }} />
+    <!-- Toastr CSS -->
+    <link href="{{ asset('vendor/flasher/jquery.min.js') }}" rel="stylesheet">
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href={{ asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }} />
-
+    <!-- Toastr JS -->
     @yield('tiny-mce')
 
     <!-- Page CSS -->
@@ -79,6 +81,14 @@
                         </a>
                     </li>
                     <!-- /Blog -->
+                    <!--Book-->
+                    {{-- <li class="menu-item {{ request()->routeIs('Admin.book.index') ? 'active' : '' }}">
+                        <a href="{{ route('Admin.book.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-book"></i>
+                            <div data-i18n="Analytics">Book</div>
+                        </a>
+                    </li> --}}
+                    <!--/Book-->
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -108,11 +118,17 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="auth-login-basic.html">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             <i class="bx bx-power-off me-2"></i>
                                             <span class="align-middle">Log Out</span>
                                         </a>
                                     </li>
+
                                 </ul>
                             </li>
 
@@ -148,6 +164,18 @@
                                 @endif
                             </ol>
                         </nav>
+                        @if (session('alertMessage'))
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    Swal.fire({
+                                        title: 'Alert',
+                                        text: "{{ session('alertMessage') }}",
+                                        icon: 'info',
+                                        confirmButtonText: 'OK'
+                                    });
+                                });
+                            </script>
+                        @endif
 
 
                         @yield('content')
@@ -189,14 +217,18 @@
         <script src={{ asset('vendor/libs/popper/popper.js') }}></script>
         <script src={{ asset('vendor/js/bootstrap.js') }}></script>
         <script src={{ asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}></script>
+        
 
         <script src={{ asset('vendor/js/menu.js') }}></script>
         <!-- endbuild -->
+        <!-- SweetAlert2 CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <!-- Vendors JS -->
 
         <!-- Main JS -->
         <script src={{ asset('js/admin-main.js') }}></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </body>
 
