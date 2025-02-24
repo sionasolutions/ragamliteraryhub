@@ -466,7 +466,7 @@
         </div>
         
         <div class="d-flex justify-content-center">
-            <a href="#" class="view-more">View More</a>
+            <a href="{{route('User.news.show')}}" class="view-more">View More</a>
         </div>
 
     </section>

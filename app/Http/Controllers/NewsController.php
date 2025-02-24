@@ -85,23 +85,26 @@ class NewsController extends Controller
         return redirect()->route('Admin.news.index')->with('success', 'News updated successfully!');
     }
     public function destroy($id)
-{
-    $news = media_mentions::findOrFail($id);
+    {
+        $news = media_mentions::findOrFail($id);
 
-    // Delete the thumbnail if it exists
-    if ($news->thumbnail) {
-        Storage::disk('public')->delete(str_replace('storage/', '', $news->thumbnail));
+        // Delete the thumbnail if it exists
+        if ($news->thumbnail) {
+            Storage::disk('public')->delete(str_replace('storage/', '', $news->thumbnail));
+        }
+
+        $news->delete();
+
+        // Return JSON for AJAX requests
+        if (request()->ajax()) {
+            return response()->json(['success' => true, 'message' => 'News deleted successfully!']);
+        }
+
+        return redirect()->route('Admin.news.index')->with('success', 'News deleted successfully!');
     }
 
-    $news->delete();
-
-    // Return JSON for AJAX requests
-    if (request()->ajax()) {
-        return response()->json(['success' => true, 'message' => 'News deleted successfully!']);
+    public function newsview(){
+        $news = media_mentions::whereNull('link')->latest()->paginate(10);
+        return view('User.news.show', compact('news'));
     }
-
-    return redirect()->route('Admin.news.index')->with('success', 'News deleted successfully!');
-}
-
-    
 }

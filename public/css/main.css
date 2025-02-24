@@ -293,11 +293,12 @@ h6 {
   .header-toggle {
     display: block;
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 15px;
+    left: 15px;
     font-size: 30px;
     cursor: pointer;
     z-index: 10000;
+    color:#aaa;
   }
 
   /* Nav menu styling */
@@ -396,7 +397,7 @@ h6 {
 /* Ensure mobile navigation doesn’t overlap */
 @media (max-width: 767px) {
   .header {
-    padding: 10px 15px;
+    padding: 0px;
   }
 
   .navmenu {

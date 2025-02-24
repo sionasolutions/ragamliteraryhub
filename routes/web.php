@@ -77,6 +77,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 
-
+//blogs view routes
 Route::get('/blogs', [BlogController::class, 'blogs'])->name('User.blog.blogview');
 Route::get('/blogs/{slug}', [BlogController::class, 'blog'])->name('User.blog.show');
+
+//news view routes
+Route::get('/news', [NewsController::class, 'newsview'])->name('User.news.show');
