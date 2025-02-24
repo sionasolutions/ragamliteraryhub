@@ -14,9 +14,7 @@
                         <tr>
                             <th>SL NO</th>
                             <th>Title</th>
-                            <th>Author</th>
-                            <th>Cover</th>
-                            <th>Publication Date</th>
+                            <th>Thumbnail</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -30,11 +28,9 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $book->title }}</td>
-                                    <td>{{ $book->author }}</td>
                                     <td>
-                                        <img src="{{ asset('storage/' . $book->cover_image) }}" alt="Book Cover" width="50">
+                                        <img src="{{ asset('storage/' . $book->image) }}" alt="Book Cover" width="50">
                                     </td>
-                                    <td>{{ $book->publication_date ? \Carbon\Carbon::parse($book->publication_date)->format('d/m/Y') : 'N/A' }}</td>
                                     <td class="text-center">
                                         <form action="{{ route('Admin.book.restore', $book->id) }}" method="POST">
                                             @csrf

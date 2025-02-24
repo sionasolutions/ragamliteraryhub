@@ -10,17 +10,17 @@
     <div class="card">
         <div class="card-datatable text-nowrap">
             <div class="d-flex justify-content-between align-items-center col flex-wrap m-2 gap-2">
-                <form method="GET" action="{{ route('Admin.blog.index') }}"
+                <form method="GET" action="{{ route('Admin.book.index') }}"
                     class="d-flex justify-content-center align-items-center">
                     <div class="dt-search mt-0 mt-md-6 d-flex justify-content-center align-items-center">
                         <label for="dt-search-0">Search</label>
                         <input type="search" name="search" class="form-control ms-2" id="dt-search-0"
-                            placeholder="Search Blogs" value="{{ request('search') }}">
+                            placeholder="Search Books" value="{{ request('search') }}">
                     </div>
                 </form>
 
                 <div class=" justify-content-between align-items-center dt-layout-end col-md-auto ms-auto mt-0">
-                    <a href="{{ route('Admin.blog.archived') }}" class="btn btn-warning">View Archived Blogs</a>
+                    <a href="{{ route('Admin.book.archived') }}" class="btn btn-warning">View Archived Books</a>
                 </div>
             </div>
             <div class="table-responsive">

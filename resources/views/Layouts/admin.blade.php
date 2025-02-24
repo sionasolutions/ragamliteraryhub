@@ -97,6 +97,14 @@
                         </a>
                     </li>
                     <!--/News-->
+                    <!--Media-->
+                    <li class="menu-item {{ request()->routeIs('Admin.media.index') ? 'active' : '' }}">
+                        <a href="{{ route('Admin.media.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-image"></i>
+                            <div data-i18n="Analytics">Media</div>
+                        </a>
+                    </li>
+                    <!--/Media-->
 
                 </ul>
             </aside>
@@ -182,6 +190,28 @@
                                         <li class="breadcrumb-item active" aria-current="page">Archived Book</li>
                                     @else
                                         <li class="breadcrumb-item active" aria-current="page">Book List</li>
+                                    @endif
+                                @endif
+                                @if (request()->routeIs('Admin.news'))
+                                    <li class="breadcrumb-item"><a href="{{ route('Admin.news.index') }}">News</a>
+                                    </li>
+                                    @if (request()->routeIs('Admin.news.create'))
+                                        <li class="breadcrumb-item active" aria-current="page">Create News</li>
+                                    @elseif(request()->routeIs('Admin.news.edit'))
+                                        <li class="breadcrumb-item active" aria-current="page">Edit News</li>
+                                    @else
+                                        <li class="breadcrumb-item active" aria-current="page">News List</li>
+                                    @endif
+                                @endif
+                                @if (request()->routeIs('Admin.media'))
+                                    <li class="breadcrumb-item"><a href="{{ route('Admin.media.index') }}">Media</a>
+                                    </li>
+                                    @if (request()->routeIs('Admin.media.create'))
+                                        <li class="breadcrumb-item active" aria-current="page">Create Media</li>
+                                    @elseif(request()->routeIs('Admin.media.edit'))
+                                        <li class="breadcrumb-item active" aria-current="page">Edit Media</li>
+                                    @else
+                                        <li class="breadcrumb-item active" aria-current="page">Media List</li>
                                     @endif
                                 @endif
                             </ol>

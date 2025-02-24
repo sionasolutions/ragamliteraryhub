@@ -176,4 +176,15 @@ class BlogController extends Controller
         return redirect()->back()->with('success', 'Blog Permanently Deleted Successfully!');
     }
 
+    public function blogs()
+    {
+        $blogs = Blog::where('status', 1)->latest()->paginate(10);
+        return view('User.blog.blogview', compact('blogs'));
+    }
+
+    public function blog($slug)
+    {
+        $blog = Blog::where('slug',$slug)->firstOrFail();
+        return view('User.blog.show', compact('blog'));
+    }
 }

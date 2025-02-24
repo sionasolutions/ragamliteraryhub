@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\MediaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +20,7 @@ use App\Http\Controllers\NewsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Show login form
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -65,4 +66,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit'])->name('Admin.news.edit');
     Route::put('/admin/news/{id}/update', [NewsController::class, 'update'])->name('Admin.news.update');
     Route::delete('/admin/news/{id}/destroy', [NewsController::class, 'destroy'])->name('Admin.news.destroy');
+
+    // Media routes
+    Route::get('/admin/media/index', [MediaController::class, 'index'])->name('Admin.media.index');
+    Route::get('/admin/media/create', [MediaController::class, 'create'])->name('Admin.media.create');
+    Route::post('/admin/media/store', [MediaController::class, 'store'])->name('Admin.media.store');
+    Route::get('/admin/media/{id}/edit', [MediaController::class, 'edit'])->name('Admin.media.edit');
+    Route::put('/admin/media/{id}/update', [MediaController::class, 'update'])->name('Admin.media.update');
+    Route::delete('/admin/media/{id}/destroy', [MediaController::class, 'destroy'])->name('Admin.media.destroy');
 });
+
+
+
+Route::get('/blogs', [BlogController::class, 'blogs'])->name('User.blog.blogview');
+Route::get('/blogs/{slug}', [BlogController::class, 'blog'])->name('User.blog.show');
