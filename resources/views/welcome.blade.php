@@ -26,7 +26,7 @@
 
     </section><!-- /Hero Section -->
     <!-- Section Title -->
-    <div class="container section-title about-justify p-2 my-2" id="about" data-aos="fade-up">
+    <div class="container section-title about-justify p-2 my-2" id="about" data-aos="fade-up" data-aos-delay="100">
         <h2>About</h2>
         <p> Dr. Rajashekharayya G Mathapati (12 September 1971) popularly
             known by his pen name Ragam ,was an Indian poet, playwright, novelist and critic. Ragam spent his early
@@ -433,7 +433,7 @@
                 <!-- Second Column with Text and Button -->
                 <div class="col-lg-6">
                     <h2 class="buy-copy">Buy Your Copy</h2>
-                    <p class="text-justify"> Dr. Rajashekharayya G Mathapati (12 September 1971), popularly known by his pen name Ragam, is an
+                    <p class="text-justify lh-lg"> Dr. Rajashekharayya G Mathapati (12 September 1971), popularly known by his pen name Ragam, is an
                         Indian
                         poet, playwright, novelist, and critic. He spent his early childhood in Chadachan, Karnataka, and
                         later
@@ -516,7 +516,7 @@
         </section>
     @endif
     <!-- Contact Section -->
-    <section id="contactForm" class="contact section">
+    <section id="contact" class="contact section">
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
