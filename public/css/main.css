@@ -866,7 +866,9 @@ section,
   text-align: center;
   letter-spacing: 1px;
 }
-
+.buy-button:hover{
+  color: #000408;
+}
 .books-content h2 {
   font-weight: bold;
   position: relative;
