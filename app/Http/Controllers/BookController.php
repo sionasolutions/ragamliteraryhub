@@ -176,4 +176,9 @@ class BookController extends Controller
         $book->forceDelete();
         return redirect()->back()->with('success', 'Book Permanently Deleted Successfully!');
     }
+
+    public function booksview(){
+        $books = Book::all();
+        return view('User.book.bookview', compact('books'));
+    }
 }

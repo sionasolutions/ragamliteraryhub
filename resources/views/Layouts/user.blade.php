@@ -40,15 +40,15 @@
         <!-- Mobile nav menu -->
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
-                <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
-                <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Blogs</a></li>
-                <li><a href="#newsletter"><i class="bi bi-file-earmark-text navicon"></i> NewsLetter</a></li>
-                <li><a href="#books"><i class="bi bi-file-earmark-text navicon"></i> Books & Poems</a></li>
-                <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Gallery</a></li>
-                <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Achievements</a></li>
-                
-                <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
+                <li><a href="{{ url('/') }}#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
+                <li><a href="{{ url('/') }}#about"><i class="bi bi-person navicon"></i> About</a></li>
+                <li><a href="{{ url('/') }}#resume"><i class="bi bi-file-earmark-text navicon"></i> Blogs</a></li>
+                <li><a href="{{ url('/') }}#newsletter"><i class="bi bi-file-earmark-text navicon"></i> NewsLetter</a></li>
+                <li><a href="{{ url('/') }}#books"><i class="bi bi-file-earmark-text navicon"></i> Books & Poems</a></li>
+                {{-- <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Gallery</a></li>
+                <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Achievements</a></li> --}}
+
+                <li><a href="{{ url('/') }}#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
             </ul>
         </nav>
 

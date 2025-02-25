@@ -31,16 +31,6 @@
                             @enderror
                         </div>
 
-                        <!-- Author Field -->
-                        <div class="mb-3">
-                            <label class="form-label" for="author">Author</label>
-                            <input type="text" name="author" class="form-control @error('author') is-invalid @enderror"
-                                id="author" value="{{ old('author', $book->author) }}">
-                            @error('author')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
                         <div class="row mb-3">
                             <!-- Publication Date -->
                             <div class="col-md-6">
@@ -79,7 +69,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6">
-                                <img id="imagePreview" src="{{ asset('storage/' . $book->cover_image) }}" alt="Current Cover Image"
+                                <img id="imagePreview" src="{{ asset('storage/' . $book->image) }}" alt="Current Cover Image"
                                     class="img-thumbnail" style="max-width: 100px; height: auto;">
                             </div>
                         </div>

@@ -81,5 +81,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::get('/blogs', [BlogController::class, 'blogs'])->name('User.blog.blogview');
 Route::get('/blogs/{slug}', [BlogController::class, 'blog'])->name('User.blog.show');
 
+//books view routes
+Route::get('/books', [BookController::class, 'booksview'])->name('User.book.bookview');
+
 //news view routes
 Route::get('/news', [NewsController::class, 'newsview'])->name('User.news.show');
+
+//email route
+Route::post('/email', [HomeController::class, 'email'])->name('User.email');
+

@@ -1,5 +1,14 @@
 @extends('layouts.user')
 
+@section('title', 'Home')
+
+@section('css')
+    <style>
+        .loading {
+            display: none !important;
+        }
+    </style>
+@endsection
 @section('content')
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
@@ -121,39 +130,50 @@
                 <h2 class="text-center mb-4 ">Biography</h2>
             </div>
         </div>
-        <!-- Early Life and Education Section -->
+        <!-- Early Life, Education, and Career Sections with 3 Cards -->
         <div class="row mb-4 mx-1">
-            <div class="col-12">
-                <h4>Early Life and Education</h4>
-                <p>
-                    Ragam was born in 1971 in Telasanga, Athani Taluk, Belagavi District. He spent his early education in
-                    Chadachana, the last town in Karnataka. He pursued further education from his undergraduate studies to
-                    his
-                    PhD in various locations including Vijayapura, Solapur, Kollapur, and Dharwad.
-                </p>
+            <!-- Early Life Card -->
+            <div class="col-md-4 mb-3">
+                <div class="card border-0  h-100" style="box-shadow: 0 10px 15px rgba(20, 157, 221, 0.3);">
+                    <div class="card-body">
+                        <h4 class="card-title" style="font-weight: bold;">Early Life and Education</h4>
+                        <p class="card-text">
+                            Ragam was born in 1971 in Telasanga, Athani Taluk, Belagavi District. He spent his early
+                            education in Chadachana, the last town in Karnataka. He pursued further education from his
+                            undergraduate studies to his PhD in various locations including Vijayapura, Solapur, Kollapur,
+                            and Dharwad.
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
-        <!-- Family Section -->
-        <div class="row mb-4 mx-1 ">
-            <div class="col-12">
-                <h4>Family</h4>
-                <p>
-                    Ragam married Padmashree on 10 November 2005. He has two sons, Sidharth and Kabir, and one daughter,
-                    Tharangini.
-                </p>
-            </div>
-        </div>
 
-        <!-- Career Section -->
-        <div class="row mb-4 mx-1">
-            <div class="col-12">
-                <h4>Career</h4>
-                <p>
-                    Ragam started his career as a research assistant at CIIL in Mysore before taking on lecturing roles in
-                    Belagavi, Hubli, Guledagudda, Bhatkal, Bagalkot, and Beluru. Currently, he heads the Department of
-                    English at G.F.G.C., Vijayanagar in Bangalore. Ragam is also involved in literary composition and film
-                    direction.
-                </p>
+            <!-- Family Card -->
+            <div class="col-md-4 mb-3">
+                <div class="card border-0 h-100" style="box-shadow: 0 10px 15px rgba(20, 157, 221, 0.3);">
+                    <div class="card-body">
+                        <h4 class="card-title " style="font-weight: bold;">Family</h4>
+                        <p class="card-text">
+                            Ragam married Padmashree on 10 November 2005. He has two sons, Sidharth and Kabir, and one
+                            daughter, Tharangini.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Career Card -->
+            <div class="col-md-4 mb-3">
+                <div class="card border-0 h-100" style="box-shadow: 0 10px 15px rgba(20, 157, 221, 0.3);">
+                    <div class="card-body">
+                        <h4 class="card-title" style="font-weight: bold;">Career</h4>
+                        <p class="card-text">
+                            Ragam started his career as a research assistant at CIIL in Mysore before taking on lecturing
+                            roles in Belagavi, Hubli, Guledagudda, Bhatkal, Bagalkot, and Beluru. Currently, he heads the
+                            Department of English at G.F.G.C., Vijayanagar in Bangalore. Ragam is also involved in literary
+                            composition and film direction.
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -376,11 +396,12 @@
 
         </div>
     </div>
+    <!-- Skills Section -->
     <section id="books" class="books section light-background">
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <h2>Books & Poems</h2>
+            <h2>Books </h2>
 
         </div><!-- End Section Title -->
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -388,95 +409,118 @@
 
                 <!-- First Column with Image -->
                 <div class="col-lg-6">
-                    <img src="C:\Users\melri\Downloads\IMG-20241223-WA0093.jpg" alt="Book Image" class="img-fluid"
-                        style="max-width: 100%; height: auto;">
+                    <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                        <div class="carousel-inner">
+                            @foreach ($books as $index => $book)
+                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                    <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image"
+                                        class="d-block w-100" style="height: auto;">
+                                </div>
+                            @endforeach
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
+
 
                 <!-- Second Column with Text and Button -->
                 <div class="col-lg-6">
                     <h2 class="buy-copy">Buy Your Copy</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl vel bibendum convallis,
-                        augue felis sollicitudin leo, a consequat felis lorem non elit.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl vel bibendum convallis,
-                        augue felis sollicitudin leo, a consequat felis lorem non elit.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl vel bibendum convallis,
-                        augue felis sollicitudin leo, a consequat felis lorem non elit.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl vel bibendum convallis,
-                        augue felis sollicitudin leo, a consequat felis lorem non elit.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl vel bibendum convallis,
-                        augue felis sollicitudin leo, a consequat felis lorem non elit.
+                    <p class="text-justify"> Dr. Rajashekharayya G Mathapati (12 September 1971), popularly known by his pen name Ragam, is an
+                        Indian
+                        poet, playwright, novelist, and critic. He spent his early childhood in Chadachan, Karnataka, and
+                        later
+                        pursued his education in various locations, including Vijayapura, Solapur, Kolhapur, and Dharwad.
+                        Ragam
+                        has worked as a research assistant, lecturer, and is currently the head of the Department of English
+                        at
+                        G.F.G.C. Vijayanaga in Bangalore. His literary works have gained significant recognition, and he has
+                        made
+                        contributions to film direction as well. Ragam has received numerous awards, including the Gandhi
+                        Memorial
+                        Nidhi Award in 2012 for his work "Gandhi Anthima Dinagalu," the "Srivijaya Award" in 2013 from the
+                        Kannada
+                        Sahitya Parishat, and the Basava Puraskara in 2022. He is known for his novels such as "Jagadvandya
+                        Bharatam" and "Dandi," as well as his poetry collections like "Arpane" and "Yaradu Dadagala Naduve."
 
                     </p>
-                    <a href="#" class="view-more">View More</a>
+                    <a href="{{route('User.book.bookview')}}" class="view-more">View More</a>
                 </div>
 
             </div>
         </div>
 
-    </section>
-    <!-- /Skills Section -->
+    </section><!-- /Skills Section -->
+    @if ($blogs->count() > 0)
+        <!-- Resume Section -->
+        <section id="resume" class="resume section">
 
-    <!-- Resume Section -->
-    <section id="resume" class="resume section">
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Blogs</h2>
 
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-            <h2>Blogs</h2>
-        
-            <div class="blog-container">
-                @foreach($blogs as $blog)
-                <div class="blog-item">
-                    <div class="blog-img">
-                        <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}">
-                    </div>
-                    <div class="blog-content">
-                        <span class="blog-date">{{ $blog->date->format('d F Y') }}</span>
-                        <div class="blog-title">{{ $blog->title }}</div>
-                        <div class="blog-text">{{ Str::limit(strip_tags($blog->content), 100) }}</div>
-                        <a href="{{ route('User.blog.show', $blog->slug) }}" class="blog-button">READ MORE</a>
-                    </div>
+                <div class="blog-container">
+                    @foreach ($blogs as $blog)
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}">
+                            </div>
+                            <div class="blog-content">
+                                <span class="blog-date">{{ $blog->date->format('d F Y') }}</span>
+                                <div class="blog-title">{{ Str::limit($blog->title,20) }}</div>
+                                <a href="{{ route('User.blog.show', $blog->slug) }}" class="blog-button rounded-1">READ MORE</a>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
+
+                <div class="d-flex justify-content-center">
+                    <a href="{{ route('User.blog.blogview') }}" class="view-more">View More</a>
+                </div>
+
+            </div><!-- End Section Title -->
+
+        </section>
+        <!-- /Resume Section -->
+    @endif
+    @if ($news->count() > 0)
+        <!-- Newsletter Section -->
+        <section id="newsletter" class="resume section">
+            <div class="container section-title" data-aos="fade-up">
+                <h2>News Mentions</h2>
+            </div>
+            <div class="newsletter-container justify-content-center">
+                @foreach ($news as $new)
+                    <div class="newsletter-item">
+                        <div class="newsletter-img">
+                            <img src="{{ asset('storage/' . $new->thumbnail) }}" alt="{{ $new->title }}">
+                        </div>
+                        <div class="newsletter-content">
+                            <div class="newsletter-title">{{ $new->title }}</div>
+                        </div>
+                    </div>
                 @endforeach
             </div>
-            
+
             <div class="d-flex justify-content-center">
-                <a href="{{ route('User.blog.blogview') }}" class="view-more">View More</a>
+                <a href="{{ route('User.news.show') }}" class="view-more">View More</a>
             </div>
 
-    </div><!-- End Section Title -->
-
-    </section>
-    <!-- /Resume Section -->
-
-    <section id="newsletter" class="resume section">
-        <div class="container section-title" data-aos="fade-up">
-            <h2>News Mentions</h2>
-        </div>
-        <div class="newsletter-container justify-content-center">
-            @foreach($news as $new)
-                <div class="newsletter-item">
-                    <div class="newsletter-img">
-                        <img src="{{ asset('storage/'.$new->thumbnail) }}" alt="{{ $new->title }}">
-                    </div>
-                    <div class="newsletter-content">
-                        <div class="newsletter-title">{{ $new->title }}</div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-        
-        <div class="d-flex justify-content-center">
-            <a href="{{route('User.news.show')}}" class="view-more">View More</a>
-        </div>
-
-    </section>
+        </section>
+    @endif
     <!-- Contact Section -->
-    <section id="contact" class="contact section">
+    <section id="contactForm" class="contact section">
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>Contact</h2>
-            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
         </div><!-- End Section Title -->
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -490,7 +534,8 @@
                             <i class="bi bi-geo-alt flex-shrink-0"></i>
                             <div>
                                 <h3>Address</h3>
-                                <p>A108 Adam Street, New York, NY 535022</p>
+                                <p>No. 24, 2nd Main, 1st Phase, West of Chord Road, Manjunath Nagar, Rajajinagar,
+                                    Bengaluru - 560010</p>
                             </div>
                         </div><!-- End Info Item -->
 
@@ -498,7 +543,7 @@
                             <i class="bi bi-telephone flex-shrink-0"></i>
                             <div>
                                 <h3>Call Us</h3>
-                                <p>+1 5589 55488 55</p>
+                                <p>+91 <a href="tele:9019740989 " style="color:black;">9019740989</a></p>
                             </div>
                         </div><!-- End Info Item -->
 
@@ -506,20 +551,21 @@
                             <i class="bi bi-envelope flex-shrink-0"></i>
                             <div>
                                 <h3>Email Us</h3>
-                                <p>info@example.com</p>
+                                <p><a href="mailto:shreeragam71@gmail.com"> shreeragam71@gmail.com</a></p>
                             </div>
                         </div><!-- End Info Item -->
 
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4636.783131592138!2d77.54663657579805!3d12.996869687320771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d9039c84e7b%3A0xdace2112432c703!2s24%2C%202nd%20Main%20Rd%2C%201st%20Phase%2C%20Manjunath%20Nagar%2C%20Basaveshwar%20Nagar%2C%20Bengaluru%2C%20Karnataka%20560079!5e1!3m2!1sen!2sin!4v1740486480959!5m2!1sen!2sin"
                             frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen=""
                             loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
 
                 <div class="col-lg-7">
-                    <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
-                        data-aos-delay="200">
+                    <form action="{{ route('User.email') }}" id="contactForm" method="post" class="php-email-form"
+                        data-aos="fade-up" data-aos-delay="200">
+                        @csrf
                         <div class="row gy-4">
 
                             <div class="col-md-6">
@@ -561,4 +607,7 @@
         </div>
     </section>
     <!-- /Contact Section -->
+@endsection
+
+@section('js')
 @endsection
