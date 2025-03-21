@@ -7,6 +7,110 @@
         .loading {
             display: none !important;
         }
+
+        .categories-slider {
+            padding: 0 40px;
+        }
+
+        .swiper-slide {
+            height: auto;
+        }
+
+        .category-content {
+            transition: all 0.3s ease;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-content:hover {
+            background: #f8f9fa !important;
+            transform: translateY(-5px);
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #333;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 50%;
+        }
+
+        .category-content h4 {
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            line-height: 1.3;
+        }
+
+        .work-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .work-circle:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .work-circle i {
+            color: #149ddd;
+        }
+        .category-circle {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(145deg, #f0f0f0, #dcdcdc);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.15), -6px -6px 12px rgba(255, 255, 255, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.category-circle:hover {
+    background: linear-gradient(145deg, #007bff, #0056b3);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2), -8px -8px 16px rgba(255, 255, 255, 0.8);
+}
+
+.category-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    max-width: 90px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.category-circle:hover .category-text {
+    color: white;
+    transition: 0.3s;
+}
+
+
+        @media (max-width: 768px) {
+            .work-circle {
+                width: 120px;
+                height: 120px;
+            }
+        }
     </style>
 @endsection
 @section('content')
@@ -396,6 +500,40 @@
 
         </div>
     </div>
+
+    <!-- Literary Works Section -->
+<section id="works" class="works section">
+    <div class="container">
+        <!-- Section Title -->
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="mb-5" data-aos="fade-up">Literary Works</h2>
+            </div>
+        </div>
+
+        <!-- Categories in Circular Layout -->
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
+            @foreach ($categories as $category)
+                <div class="col-md-3 col-sm-6 col-6 mb-4">
+                    <a href="{{ route('User.works.category', $category->slug) }}" class="d-block text-center">
+                        <div class="category-circle">
+                            <span class="category-text">{{ $category->name }}</span>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+
+        <!-- View More Button -->
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <a href="{{ route('User.works.allCategories') }}" class="btn btn-outline-primary">View All</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
     <!-- Skills Section -->
     <section id="books" class="books section light-background">
 
@@ -433,7 +571,8 @@
                 <!-- Second Column with Text and Button -->
                 <div class="col-lg-6">
                     <h2 class="buy-copy">Buy Your Copy</h2>
-                    <p class="text-justify lh-lg"> Dr. Rajashekharayya G Mathapati (12 September 1971), popularly known by his pen name Ragam, is an
+                    <p class="text-justify lh-lg"> Dr. Rajashekharayya G Mathapati (12 September 1971), popularly known by
+                        his pen name Ragam, is an
                         Indian
                         poet, playwright, novelist, and critic. He spent his early childhood in Chadachan, Karnataka, and
                         later
@@ -451,7 +590,7 @@
                         Bharatam" and "Dandi," as well as his poetry collections like "Arpane" and "Yaradu Dadagala Naduve."
 
                     </p>
-                    <a href="{{route('User.book.bookview')}}" class="view-more">View More</a>
+                    <a href="{{ route('User.book.bookview') }}" class="view-more">View More</a>
                 </div>
 
             </div>
@@ -474,8 +613,9 @@
                             </div>
                             <div class="blog-content">
                                 <span class="blog-date">{{ $blog->date->format('d F Y') }}</span>
-                                <div class="blog-title">{{ Str::limit($blog->title,20) }}</div>
-                                <a href="{{ route('User.blog.show', $blog->slug) }}" class="blog-button rounded-1">READ MORE</a>
+                                <div class="blog-title">{{ Str::limit($blog->title, 20) }}</div>
+                                <a href="{{ route('User.blog.show', $blog->slug) }}" class="blog-button rounded-1">READ
+                                    MORE</a>
                             </div>
                         </div>
                     @endforeach
@@ -610,4 +750,35 @@
 @endsection
 
 @section('js')
+    <script>
+        new Swiper('.categories-slider', {
+            slidesPerView: 2,
+            spaceBetween: 15,
+            loop: {{ $categories->count() > 3 ? 'true' : 'false' }},
+            autoplay: {
+                delay: 3000,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                576: {
+                    slidesPerView: 3
+                },
+                768: {
+                    slidesPerView: 4,
+                    spaceBetween: 20
+                },
+                992: {
+                    slidesPerView: 5,
+                    spaceBetween: 25
+                }
+            }
+        });
+    </script>
 @endsection

@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\media_mentions;
 use App\Mail\ContactMail;
 use App\Models\Book;
+use App\Models\Categories;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
@@ -25,7 +26,8 @@ class HomeController extends Controller
 
         $books = Book::whereNotNull('image')->latest()->take(3)->get();
 
-        return view('welcome', compact('blogs', 'news','books'));
+        $categories = Categories::all();
+        return view('welcome', compact('blogs', 'news','books','categories'));
     }
 
     public function email(Request $request)

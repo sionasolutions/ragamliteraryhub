@@ -105,6 +105,26 @@
                         </a>
                     </li>
                     <!--/Media-->
+                    
+                    
+                    <li class="menu-item ">
+                        <a href="#" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-briefcase"></i>
+                            <div data-i18n="Works">Works</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item {{ request()->routeIs('Admin.categories.index') ? 'active' : '' }}">
+                                <a href="{{ route('Admin.categories.index') }}" class="menu-link">
+                                    <div data-i18n="Categories">Categories</div>
+                                </a>
+                            </li>
+                            <li class="menu-item ">
+                                <a href="{{ route('Admin.works.index') }}" class="menu-link">
+                                    <div data-i18n="Works">Works</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
                 </ul>
             </aside>

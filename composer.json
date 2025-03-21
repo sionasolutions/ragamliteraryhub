@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.8",
         "spatie/laravel-sluggable": "^3.7",
         "tinymce/tinymce": "^7.7",
+        "voku/portable-ascii": "^2.0",
         "yoeunes/toastr": "^2.3"
     },
     "require-dev": {
