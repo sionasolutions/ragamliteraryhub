@@ -30,6 +30,8 @@
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
+    @yield('css')
+
 </head>
 
 <body class="index-page">

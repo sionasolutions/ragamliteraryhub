@@ -8,6 +8,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\WorkController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,12 +76,46 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/media/{id}/edit', [MediaController::class, 'edit'])->name('Admin.media.edit');
     Route::put('/admin/media/{id}/update', [MediaController::class, 'update'])->name('Admin.media.update');
     Route::delete('/admin/media/{id}/destroy', [MediaController::class, 'destroy'])->name('Admin.media.destroy');
+
+
+    //category routes
+    Route::resource('/admin/categories', CategoryController::class)->names([
+        'index' => 'Admin.categories.index',
+        'create' => 'Admin.categories.create',
+        'store' => 'Admin.categories.store',
+        'show' => 'Admin.categories.show',
+        'edit' => 'Admin.categories.edit',
+        'update' => 'Admin.categories.update',
+        'destroy' => 'Admin.categories.destroy',
+    ]);
+
+    //work routes
+    Route::get('/admin/works/archived', [WorkController::class, 'archived'])->name('Admin.works.archived');
+    Route::post('/works/{id}/restore', [WorkController::class, 'restore'])->name('Admin.works.restore');
+    Route::delete('/works/{id}/force-delete', [WorkController::class, 'forceDelete'])->name('Admin.works.forceDelete');
+    Route::resource('/admin/works', WorkController::class)->names([
+        'index' => 'Admin.works.index',
+        'create' => 'Admin.works.create',
+        'store' => 'Admin.works.store',
+        'show' => 'Admin.works.show',
+        'edit' => 'Admin.works.edit',
+        'update' => 'Admin.works.update',
+        'destroy' => 'Admin.works.destroy',
+    ]);
+    // Add this after the resource route
+    Route::post('/admin/works/{work}/toggleStatus', [WorkController::class, 'toggleStatus'])->name('Admin.works.toggleStatus');
 });
 
 
 //blogs view routes
 Route::get('/blogs', [BlogController::class, 'blogs'])->name('User.blog.blogview');
 Route::get('/blogs/{slug}', [BlogController::class, 'blog'])->name('User.blog.show');
+
+// Works View Routes
+Route::get('/works', [WorkController::class, 'works'])->name('User.works.index'); // List all categories
+Route::get('/works/all-categories', [WorkController::class, 'allCategories'])->name('User.works.allCategories'); // All categories
+Route::get('/works/{category}', [WorkController::class, 'work'])->name('User.works.category'); // Works in a category
+Route::get('/works/{category}/{work}', [WorkController::class, 'show'])->name('User.works.show'); // Single work details
 
 //books view routes
 Route::get('/books', [BookController::class, 'booksview'])->name('User.book.bookview');
