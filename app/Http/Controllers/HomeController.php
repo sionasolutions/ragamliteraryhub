@@ -26,7 +26,7 @@ class HomeController extends Controller
 
         $books = Book::whereNotNull('image')->latest()->take(3)->get();
 
-        $categories = Categories::all();
+        $categories = Categories::get()->take(4);
         return view('welcome', compact('blogs', 'news','books','categories'));
     }
 

@@ -1,46 +1,48 @@
 @extends('layouts.user')
 
 @section('content')
-<section class="work-detail py-5">
+<section class="work-detail dark-background py-5">
     <div class="container">
         <!-- Back Navigation -->
-        <nav class="mb-4" data-aos="fade-down">
-            <a href="{{ route('User.works.category', $category->slug) }}" class="btn btn-link text-decoration-none">
-                ← Back to {{ $category->name }}
+        <nav class="mb-5" data-aos="fade-down">
+            <a href="{{ route('User.works.category', $category->slug) }}" class="back-link gold-link">
+                <i class="bi bi-arrow-left-short"></i>
+                <span>Back to {{ $category->name }}</span>
             </a>
         </nav>
 
         <!-- Main Content -->
         <div class="row g-5">
             <!-- Image Section -->
-            <div class="col-lg-7" data-aos="fade-right">
-                <div class="card border-0 shadow-lg overflow-hidden">
-                    <div class="ratio ratio-4x3">
+            <div class="col-lg-8" data-aos="fade-right">
+                <div class="artwork-frame border-gold rounded-4 overflow-hidden">
+                    <div class="artwork-inner">
                         <img src="{{ asset('storage/' . $work->image_path) }}" 
                              alt="{{ $work->title }}" 
-                             class="object-fit-cover"
+                             class="artwork-image"
                              loading="lazy">
+                        <div class="gradient-overlay"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Content Section -->
-            <div class="col-lg-5" data-aos="fade-left" data-aos-delay="150">
-                <div class="d-flex flex-column h-100">
-                    <div class="mb-4">
-                        <h1 class="display-5 fw-bold mb-3">{{ $work->title }}</h1>
-                        <div class="d-flex align-items-center gap-3 text-muted">
-                            <div class="badge bg-primary rounded-pill px-3 py-2">
+            <div class="col-lg-4" data-aos="fade-left" data-aos-delay="150">
+                <div class="work-meta">
+                    <div class="mb-5">
+                        <h1 class="display-4 gold-text fw-bold mb-4">{{ $work->title }}</h1>
+                        <div class="d-flex align-items-center gap-4">
+                            <div class="category-badge">
                                 {{ $category->name }}
                             </div>
-                            <div class="text-muted">
-                                <i class="bi bi-calendar me-1"></i>
+                            <div class="publish-date gold-muted">
+                                <i class="bi bi-calendar me-2"></i>
                                 {{ $work->created_at->format('M Y') }}
                             </div>
                         </div>
                     </div>
 
-                    <article class="prose flex-grow-1 text-justify">
+                    <article class="work-description white-text text-justify">
                         {!! $work->description !!}
                     </article>
                 </div>
@@ -50,20 +52,22 @@
         <!-- Related Works -->
         @if($relatedWorks->count() > 0)
         <div class="mt-5 pt-5" data-aos="fade-up">
-            <h3 class="h4 mb-4">More in {{ $category->name }}</h3>
+            <h3 class="gold-text h2 mb-5">More from {{ $category->name }}</h3>
             <div class="row g-4">
                 @foreach($relatedWorks as $related)
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 50 }}">
                     <a href="{{ route('User.works.show', [$category->slug, $related->slug]) }}" 
-                       class="card h-100 border-0 shadow-hover text-decoration-none">
-                        <div class="ratio ratio-4x3">
+                       class="related-work-card">
+                        <div class="image-container">
                             <img src="{{ asset('storage/' . $related->image_path) }}" 
                                  alt="{{ $related->title }}"
-                                 class="object-fit-cover"
                                  loading="lazy">
+                            <div class="hover-content">
+                                <span class="view-button">View Work</span>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title mb-0">{{ $related->title }}</h5>
+                        <div class="work-meta">
+                            <h5 class="gold-text">{{ $related->title }}</h5>
                         </div>
                     </a>
                 </div>
@@ -77,32 +81,120 @@
 
 @section('css')
 <style>
-    .prose {
-        line-height: 1.7;
-        font-size: 1.1rem;
-        color: #444;
+   .work-detail {
+    background: var(--dark-bg);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gold);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.back-link:hover {
+    opacity: 0.8;
+}
+
+.artwork-frame {
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+.artwork-image {
+    width: 100%;
+    height: 600px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.artwork-frame:hover .artwork-image {
+    transform: scale(1.02);
+}
+
+.gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%);
+}
+
+.category-badge {
+    background: rgba(255, 215, 0, 0.1);
+    color: var(--gold);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+}
+
+.publish-date {
+    color: rgba(255, 215, 0, 0.8);
+}
+
+.work-description {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.related-work-card {
+    text-decoration: none;
+    display: block;
+}
+
+.image-container {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.image-container img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.hover-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.view-button {
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+}
+
+.related-work-card:hover .hover-content {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .artwork-image {
+        height: 400px;
     }
-    .prose img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 0.5rem;
-        margin: 1.5rem 0;
+    
+    .display-4 {
+        font-size: 2rem;
     }
-    .ratio-4x3 {
-        --bs-aspect-ratio: 100%;
-    }
-    .object-fit-cover {
-        object-fit: contain;
-        object-position: center;
-    }
-    .shadow-hover {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.08);
-    }
-    .shadow-hover:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 1rem 2rem rgba(0,0,0,0.12);
-    }
+}
 </style>
 @endsection
 

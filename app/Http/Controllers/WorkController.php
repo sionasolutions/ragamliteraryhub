@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Works;
+use Illuminate\Support\Str;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -38,6 +39,8 @@ class WorkController extends Controller
         $work->description = $request->description;
         $work->category_id = $request->category_id;
         $work->is_active = $request->is_active;
+
+
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -124,7 +127,7 @@ class WorkController extends Controller
     public function allCategories()
     {
         $categories = Categories::all();
-        return view('works.all-categories', compact('categories'));
+        return view('User.works.all-categories', compact('categories'));
     }
 
     public function work($slug)

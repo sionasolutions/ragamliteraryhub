@@ -1,47 +1,44 @@
 @extends('layouts.user')
 
 @section('content')
-<section class="category-works py-5">
+<section class="category-works min-vh-100 flex-grow-1 dark-background py-5">
     <div class="container">
         <!-- Breadcrumb Navigation -->
         <nav aria-label="breadcrumb" class="mb-4">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('User.works.index') }}">All Works</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ $category->name }}</li>
+            <ol class="breadcrumb gold-breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ route('User.works.all-categories') }}" class="gold-link">All Works</a>
+                </li>
+                <li class="breadcrumb-item active gold-text" aria-current="page">{{ $category->name }}</li>
             </ol>
         </nav>
 
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h1 class="display-5 fw-bold mb-0">{{ $category->name }}</h1>
-            {{-- <span class="badge bg-primary rounded-pill">{{ $works->total() }} Works</span> --}}
+            <h1 class="display-4 gold-text fw-bold mb-0 border-bottom  pb-2">{{ $category->name }}</h1>
         </div>
 
         <!-- Works Grid -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach ($works as $work)
-                <div class="col" data-aos="fade-up">
-                    <div class="card h-100 border-0 shadow-sm hover-scale">
-                        <div class="position-relative">
+                <div class="col" data-aos="fade-up" data-aos-delay="{{ $loop->index * 50 }}">
+                    <div class="card h-100 border-gold hover-scale bg-transparent">
+                        <div class="position-relative overflow-hidden">
                             <img src="{{ asset('storage/' . $work->image_path) }}" 
-                                 class="card-img-top object-fit-cover" 
+                                 class="card-img-top object-fit-cover work-image" 
                                  alt="{{ $work->title }}"
-                                 style="height: 250px;"
                                  loading="lazy">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h3 class="text-white mb-0 text-shadow">{{ $work->title }}</h3>
+                            <div class="card-img-overlay d-flex flex-column justify-content-end gradient-overlay">
+                                <h3 class="text-white mb-0">{{ $work->title }}</h3>
                             </div>
                         </div>
                         
-                        <div class="card-body">
+                        <div class="card-body bg-dark-soft">
                             <div class="d-flex justify-content-between align-items-start">
                                 <a href="{{ route('User.works.show', [$category->slug, $work->slug]) }}" 
-                                   class="btn btn-outline-primary stretched-link">
-                                    Explore
+                                   class="btn btn-gold stretched-link">
+                                    Explore Work
+                                    <i class="bi bi-arrow-right ms-2"></i>
                                 </a>
-                                {{-- <div class="text-muted small">
-                                    <i class="bi bi-calendar me-1"></i>
-                                    {{ $work->created_at->format('M Y') }}
-                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -55,9 +52,10 @@
         </div> --}}
     </div>
 </section>
+
 @endsection
 
-@section('styles')
+@section('css')
 <style>
     .hover-scale {
         transition: transform 0.3s ease, box-shadow 0.3s ease;

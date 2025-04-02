@@ -44,9 +44,9 @@
             <ul>
                 <li><a href="{{ url('/') }}#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
                 <li><a href="{{ url('/') }}#about"><i class="bi bi-person navicon"></i> About</a></li>
-                <li><a href="{{ url('/') }}#resume"><i class="bi bi-file-earmark-text navicon"></i> Blogs</a></li>
-                <li><a href="{{ url('/') }}#newsletter"><i class="bi bi-file-earmark-text navicon"></i> NewsLetter</a></li>
-                <li><a href="{{ url('/') }}#books"><i class="bi bi-file-earmark-text navicon"></i> Books & Poems</a></li>
+                {{-- <li><a href="{{ url('/') }}#resume"><i class="bi bi-file-earmark-text navicon"></i> Blogs</a></li>
+                <li><a href="{{ url('/') }}#newsletter"><i class="bi bi-file-earmark-text navicon"></i> NewsLetter</a></li> --}}
+                <li><a href="{{ url('/') }}#works"><i class="bi bi-file-earmark-text navicon"></i>Works</a></li>
                 {{-- <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Gallery</a></li>
                 <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Achievements</a></li> --}}
 
@@ -55,21 +55,21 @@
         </nav>
 
     </header>
-    <main class="main ">
+    <main class="main">
 
         @yield('content')
     </main>
-    <footer id="footer" class="footer position-relative light-background">
 
-        <div class="container">
-            <div class="credits">
-                © Developed with ❤️ by
-                <a href="https://sionasolutions.com/" target="_blank" class="footer-link fw-bolder">Siona
-                    Solutions</a>
-            </div>
+    <footer id="footer" class="footer position-relative dark-background py-4">
+    <div class="container">
+        <div class="credits text-center white-text">
+            © Developed with <span class="gold-heart">❤️</span> by
+            <a href="https://sionasolutions.com/" target="_blank" class="gold-link footer-link">
+                Siona Solutions
+            </a>
         </div>
-
-    </footer>
+    </div>
+</footer>
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i

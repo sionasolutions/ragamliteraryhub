@@ -28,7 +28,9 @@ class CategoryController extends Controller
             'name' => 'required',
         ]);
 
-        Categories::create($request->all());
+        Categories::create([
+            'name' => $request->input('name')
+        ]);
 
         return redirect()->route('Admin.categories.index')
             ->with('success', 'Category created successfully.');
@@ -52,7 +54,10 @@ class CategoryController extends Controller
 
         $category = Categories::find($id);
         if ($category) {
-            $category->update($request->all());
+
+            $category->name = $request->input('name');
+
+            $category->save();
             return redirect()->route('Admin.categories.index')
                 ->with('success', 'Category updated successfully.');
         } else {

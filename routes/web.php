@@ -108,17 +108,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 
 //blogs view routes
-Route::get('/blogs', [BlogController::class, 'blogs'])->name('User.blog.blogview');
-Route::get('/blogs/{slug}', [BlogController::class, 'blog'])->name('User.blog.show');
+// Route::get('/blogs', [BlogController::class, 'blogs'])->name('User.blog.blogview');
+// Route::get('/blogs/{slug}', [BlogController::class, 'blog'])->name('User.blog.show');
 
 // Works View Routes
 Route::get('/works', [WorkController::class, 'works'])->name('User.works.index'); // List all categories
-Route::get('/works/all-categories', [WorkController::class, 'allCategories'])->name('User.works.allCategories'); // All categories
+Route::get('/works/all-categories', [WorkController::class, 'allCategories'])->name('User.works.all-categories'); // All categories
 Route::get('/works/{category}', [WorkController::class, 'work'])->name('User.works.category'); // Works in a category
 Route::get('/works/{category}/{work}', [WorkController::class, 'show'])->name('User.works.show'); // Single work details
 
-//books view routes
-Route::get('/books', [BookController::class, 'booksview'])->name('User.book.bookview');
+// books view routes
+// Route::get('/books', [BookController::class, 'booksview'])->name('User.book.bookview');
 
 //news view routes
 Route::get('/news', [NewsController::class, 'newsview'])->name('User.news.show');
